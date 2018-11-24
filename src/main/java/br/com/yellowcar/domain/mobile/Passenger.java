@@ -21,7 +21,7 @@ public final class Passenger extends Mobile {
 	 * Next state of FSM
 	 * @param arg
 	 */
-	public void next(String arg) {
+	public void next() {
 		state = state.nextState();
 	}
 

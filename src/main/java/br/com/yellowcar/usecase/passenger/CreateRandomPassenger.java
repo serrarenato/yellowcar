@@ -21,10 +21,10 @@ public final class CreateRandomPassenger {
 	@Autowired
 	ObserverMobile observer;
 
-	public Passenger execute(Integer sizeX, Integer sizeY) {
+	public Passenger execute(Position2D world) {
 		String generatedString = "pass-" + RandomStringUtils.randomNumeric(4);
-		Double x = Math.random() * sizeX;
-		Double y = Math.random() * sizeY;
+		Double x = Math.random() * world.getX();
+		Double y = Math.random() * world.getY();
 		Position2D position = new Position2D(x.intValue(), y.intValue());
 		return new Passenger(generatedString,  observer);
 	}
