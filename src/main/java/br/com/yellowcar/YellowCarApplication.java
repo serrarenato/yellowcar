@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class YellowcarApplication {
+public class YellowCarApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(YellowcarApplication.class, args);
+		SpringApplication.run(YellowCarApplication.class, args);
 	}
 }
