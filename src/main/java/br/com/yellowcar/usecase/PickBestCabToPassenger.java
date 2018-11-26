@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.CabsWorld;
 import br.com.yellowcar.domain.mobile.Passenger;
@@ -17,6 +19,7 @@ import br.com.yellowcar.usecase.selector.Selector;
  * @author renato
  *
  */
+@Service
 public class PickBestCabToPassenger {
 	Selector selector;
 	RestrictionChain restrictionChain;

@@ -1,6 +1,7 @@
 package br.com.yellowcar.domain.restriction;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.yellowcar.domain.Position2D;
 import br.com.yellowcar.domain.exception.RestrictionException;
@@ -9,6 +10,7 @@ import br.com.yellowcar.domain.mobile.Passenger;
 import br.com.yellowcar.domain.mobile.World;
 import br.com.yellowcar.usecase.CalculateDistance;
 
+@Service
 public class MaxDistanceRestriction extends Restriction {
 	@Autowired
 	CalculateDistance calculateDistance;

@@ -1,6 +1,5 @@
 package br.com.yellowcar.usecase.selector;
 
-import java.util.EnumSet;
 import java.util.Optional;
 import java.util.Set;
 
