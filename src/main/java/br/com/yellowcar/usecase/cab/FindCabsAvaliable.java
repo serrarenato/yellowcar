@@ -1,17 +1,30 @@
 package br.com.yellowcar.usecase.cab;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.stereotype.Service;
 
-import br.com.yellowcar.domain.Position2D;
 import br.com.yellowcar.domain.mobile.Cab;
+import br.com.yellowcar.domain.mobile.CabsWorld;
 import br.com.yellowcar.domain.mobile.Passenger;
+import br.com.yellowcar.domain.restriction.RestrictionChain;
 
+/**
+ * Busca na lista de {@link Cab}, com as retrições estabalecidas quais são os
+ * Cabs disponiveis para aquele {@link Passenger}
+ * 
+ * @author renato
+ *
+ */
 @Service
 public final class FindCabsAvaliable {
-	
-	public void execute(Passenger passenger) {
-		//busca o carro e retorna a melhor opção
-		// primeiro busca pelos que estao disponiveis depois pelo mais proximo fazer um chain
+
+	public Set<Cab> execute(Passenger passenger) {
+		Set<Cab> cabsAvaliable = new HashSet<>();
+		for (Cab cab : CabsWorld.getCabsInWorld())
+			if (RestrictionChain.STATECAB_MAXDISTANCE.isPossible(cab, passenger))
+				cabsAvaliable.add(cab);
+		return cabsAvaliable;
 	}
 }

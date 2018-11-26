@@ -22,6 +22,10 @@ public abstract class Mobile extends Observable {
 		positions= new ArrayList<Position2D>();
 	}	
 	public abstract void setPosition(final Position2D position);
+	
+	public Position2D getLastPosition() {
+		return positions.get(positions.size()-1);
+	}
 
 	public void setInitialPosition(Position2D initialPosition) {
 		this.initialPosition = initialPosition;
