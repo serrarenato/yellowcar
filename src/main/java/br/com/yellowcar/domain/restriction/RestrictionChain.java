@@ -1,7 +1,5 @@
 package br.com.yellowcar.domain.restriction;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import br.com.yellowcar.domain.exception.RestrictionException;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Passenger;
@@ -23,11 +21,9 @@ public enum RestrictionChain {
 
 	};
 
-	@Autowired
-	MaxDistanceRestriction maxDistanceRestriction;
+	MaxDistanceRestriction maxDistanceRestriction = new MaxDistanceRestriction();
 
-	@Autowired
-	StateCabRestriction stateCabRestriction;
+	StateCabRestriction stateCabRestriction = new StateCabRestriction();
 
 	public abstract boolean isPossible(Cab cab, Passenger passenger);
 }

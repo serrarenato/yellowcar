@@ -13,21 +13,23 @@ import br.com.yellowcar.domain.exception.PassengerInvalidStateException;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Passenger;
 import br.com.yellowcar.domain.mobile.World;
-import br.com.yellowcar.usecase.PickBestCabToPassenger;
+import br.com.yellowcar.usecase.InsertPassengerInBestCab;
 import br.com.yellowcar.usecase.passenger.CreateRandomPassenger;
 import br.com.yellowcar.usecase.passenger.PutRandomPositionPassenger;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = YellowCarApplication.class)
-public class PickTheBestCabToPassengerTest {
+public class InsertTheBestCabToPassengerTest {
 	@Autowired
 	private CreateListRandomCabs createListRandomCabs;
-	@Autowired
-	private PickBestCabToPassenger pickBestCabToPassenger;
+
 	@Autowired
 	private PutRandomPositionPassenger putRandomPositionPassenger;
 	@Autowired
 	private CreateRandomPassenger createRandomPassenger;
+	
+	@Autowired
+	private InsertPassengerInBestCab insertPassengerInBestCab;
 
 	@Test
 	public void shouldReturnOneCabsWithPassengerWithSuccess() throws PassengerInvalidStateException {
@@ -35,7 +37,7 @@ public class PickTheBestCabToPassengerTest {
 		createListRandomCabs.execute(World.SIZE_X, World.SIZE_Y);
 		Passenger passenger = createRandomPassenger.execute(position2D);
 		passenger = putRandomPositionPassenger.execute(passenger, position2D);
-		Cab cab = pickBestCabToPassenger.execute(passenger);
+		Cab cab = insertPassengerInBestCab.execute(passenger);
 		System.out.println(cab);
 		Assert.assertNotNull(cab.getPassenger());
 	}
