@@ -17,10 +17,10 @@ public final class CabsWorld {
 
 	}
 
-	public static Set<Cab> getCabsInWorld() {
+	public static synchronized Set<Cab> getCabsInWorld() {
 		return cabsInWorld;
 	}
-	public static void setCabInWorld(Cab cab) {
+	public static synchronized void setCabInWorld(Cab cab) {
 		cabsInWorld.add(cab);
 	}
 }

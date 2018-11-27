@@ -10,12 +10,16 @@ import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Mobile;
 import br.com.yellowcar.domain.mobile.Passenger;
 import br.com.yellowcar.usecase.cab.FindCabsAvaliable;
+import br.com.yellowcar.view.RefreshScreen;
 
 @Service
 public class ObserverMobile implements Observer {
 	
 	@Autowired
 	FindCabsAvaliable findCabsAvaliable;
+	
+	@Autowired
+	RefreshScreen refreshScreen;
 	
 	@Override
 	public void update(Observable mobile, Object arg) {
@@ -25,12 +29,13 @@ public class ObserverMobile implements Observer {
 				System.out.println("Objeto passenger foi alterado: " + passenger.getPositions().get(passenger.getPositions().size()-1) + " - " + passenger.getState());
 				switch (passenger.getState()) {
 				case NO_CAB:
-					findCabsAvaliable.execute(passenger);
+					findCabsAvaliable.execute(passenger);					
 					break;
 				}
 			}
 			if (mobile instanceof Cab) {
 				Cab cab = (Cab) mobile;
+				refreshScreen.refreshScreen();
 				System.out.println("Objeto cab foi alterado: " + cab.getPositions().get(cab.getPositions().size()-1) + " - " + cab.getState());
 			}
 		}
