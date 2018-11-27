@@ -19,6 +19,7 @@ public class InsertPassengerInBestCab {
 	public Cab execute(Passenger passenger) {
 		Cab cab = pickBestCabToPassenger.execute(passenger);
 		cab.setPassenger(passenger);
+		cab.next();
 		return cab;
 	}
 }

@@ -45,4 +45,29 @@ public abstract class Mobile extends Observable {
 		setChanged();
         notifyObservers();
 	}
+	private int increment(final int current, final int destination) {
+		if (current == destination) {
+			return current;
+		}
+
+		if (current > destination) {
+			return current - 1;
+		}
+
+		return current + 1;
+	}
+	public void move(Position2D destinationPosition) {
+		if (this.getLastPosition().equals(destinationPosition)) {
+			System.out.println("Cab is on the Destiny - Error");
+			return;
+		}
+
+		Position2D currentPosition = this.getLastPosition();
+
+		currentPosition = new Position2D(increment(currentPosition.getX(), destinationPosition.getX()),
+				increment(currentPosition.getY(), destinationPosition.getY()));
+		setPositions(currentPosition);
+	}
+
+	
 }

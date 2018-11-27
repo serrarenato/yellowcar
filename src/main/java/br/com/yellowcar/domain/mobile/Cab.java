@@ -28,7 +28,7 @@ public final class Cab extends Mobile {
 	 * 
 	 * @param arg
 	 */
-	public void next(String arg) {
+	public void next() {
 		state = state.nextState();
 	}
 

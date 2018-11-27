@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Mobile;
 import br.com.yellowcar.domain.mobile.Passenger;
-import br.com.yellowcar.usecase.cab.FindCabsAvaliable;
+import br.com.yellowcar.usecase.InsertPassengerInBestCab;
 import br.com.yellowcar.view.RefreshScreen;
 
 @Service
 public class ObserverMobile implements Observer {
 	
 	@Autowired
-	FindCabsAvaliable findCabsAvaliable;
+	private InsertPassengerInBestCab insertPassengerInBestCab;
 	
 	@Autowired
 	RefreshScreen refreshScreen;
@@ -29,13 +29,18 @@ public class ObserverMobile implements Observer {
 				System.out.println("Objeto passenger foi alterado: " + passenger.getPositions().get(passenger.getPositions().size()-1) + " - " + passenger.getState());
 				switch (passenger.getState()) {
 				case NO_CAB:
-					findCabsAvaliable.execute(passenger);					
+					insertPassengerInBestCab.execute(passenger);					
 					break;
 				}
 			}
 			if (mobile instanceof Cab) {
 				Cab cab = (Cab) mobile;				
 				System.out.println("Objeto cab foi alterado: " + cab.getPositions().get(cab.getPositions().size()-1) + " - " + cab.getState());
+				switch (cab.getState()) {
+				case ON_THE_WAY:
+				//	StartMovingCab				
+					break;
+				}
 			}
 			refreshScreen.refreshScreen();
 		}

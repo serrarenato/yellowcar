@@ -5,12 +5,14 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import br.com.yellowcar.usecase.CreateSimulation;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+@EnableAsync
 public class YellowCarApplication {
 
 	public static void main(String[] args) {
