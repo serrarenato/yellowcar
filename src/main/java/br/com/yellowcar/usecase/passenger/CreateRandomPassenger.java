@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import br.com.yellowcar.domain.Position2D;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Passenger;
+import br.com.yellowcar.domain.mobile.PassengersWorld;
 import br.com.yellowcar.usecase.observer.ObserverMobile;
 
 /**
@@ -23,9 +24,8 @@ public final class CreateRandomPassenger {
 
 	public Passenger execute(Position2D world) {
 		String generatedString = "pass-" + RandomStringUtils.randomNumeric(4);
-		Double x = Math.random() * world.getX();
-		Double y = Math.random() * world.getY();
-		Position2D position = new Position2D(x.intValue(), y.intValue());
-		return new Passenger(generatedString,  observer);
+		Passenger passenger = new Passenger(generatedString, observer);
+		PassengersWorld.setPassengerInWorld(passenger);
+		return passenger;
 	}
 }

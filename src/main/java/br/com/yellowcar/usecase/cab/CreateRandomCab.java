@@ -17,7 +17,7 @@ public final class CreateRandomCab {
 	
 	public Cab execute(Integer sizeX, Integer sizeY) {
 		String generatedString = RandomStringUtils.randomAlphabetic(3).toUpperCase()
-				+ RandomStringUtils.randomNumeric(4);
+				+"-"+ RandomStringUtils.randomNumeric(4);
 		Double x = Math.random() * sizeX;
 		Double y = Math.random() * sizeY;
 		Position2D position = new Position2D(x.intValue(), y.intValue());

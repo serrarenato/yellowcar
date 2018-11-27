@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import br.com.yellowcar.domain.Position2D;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.CabsWorld;
+import br.com.yellowcar.domain.mobile.Passenger;
+import br.com.yellowcar.domain.mobile.PassengersWorld;
 import br.com.yellowcar.domain.mobile.World;
 
 
@@ -73,6 +75,22 @@ public class AppPrincipalFrame extends JFrame implements RefreshScreen{
 				}
 				final Position2D p = (Position2D) cab.getLastPosition();
 				graphics2d.drawString(cab.getId(), p.getX(), p.getY());
+			}
+		}
+		if (PassengersWorld.getPassengersInWorld().size() != 0) {
+			for (final Passenger passenger : PassengersWorld.getPassengersInWorld()) {
+				switch (passenger.getState()) {
+				case NO_CAB:
+					graphics2d.setColor(Color.RED);
+					break;
+				case WAITING_CAB:
+					graphics2d.setColor(Color.BLUE);
+					break;
+				case IN_CAB:
+					graphics2d.setColor(Color.ORANGE);
+				}
+				final Position2D p = (Position2D) passenger.getLastPosition();
+				graphics2d.drawString(passenger.getId(), p.getX(), p.getY());
 			}
 		}
 

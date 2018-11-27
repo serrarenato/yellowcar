@@ -34,10 +34,10 @@ public class ObserverMobile implements Observer {
 				}
 			}
 			if (mobile instanceof Cab) {
-				Cab cab = (Cab) mobile;
-				refreshScreen.refreshScreen();
+				Cab cab = (Cab) mobile;				
 				System.out.println("Objeto cab foi alterado: " + cab.getPositions().get(cab.getPositions().size()-1) + " - " + cab.getState());
 			}
+			refreshScreen.refreshScreen();
 		}
 	}
 
