@@ -15,7 +15,11 @@ public final class Passenger extends Mobile {
 
 	public Passenger(String id, Observer observer) {
 		super(id, observer);
-
+		setChanged();
+  	}
+	public void ready() {
+		//TODO: delete this method try do anything better after
+		 notifyObservers();
 	}
 	/**
 	 * Next state of FSM

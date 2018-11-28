@@ -20,15 +20,12 @@ import br.com.yellowcar.usecase.CalculateDistance;
  */
 public class FindMinorDistance implements Selector {
 
-	@Autowired
-	CalculateDistance calculateDistance;
-
 	@Override
 	public Optional<Cab> findTheBest(Set<Cab> cabs, Passenger passenger) {
 		Optional<Cab> bestChoice = Optional.empty();
 		double bestDistance = Double.MAX_VALUE;
 		for (Cab cab : cabs) {
-			double currentDistance = calculateDistance.execute(cab.getLastPosition(), passenger.getInitialPosition());
+			double currentDistance = CalculateDistance.execute(cab.getLastPosition(), passenger.getInitialPosition());
 			if (currentDistance < bestDistance) {
 				bestDistance = currentDistance;
 				bestChoice = Optional.of(cab);

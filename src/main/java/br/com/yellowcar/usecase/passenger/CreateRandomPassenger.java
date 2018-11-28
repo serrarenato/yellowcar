@@ -26,6 +26,7 @@ public final class CreateRandomPassenger {
 		String generatedString = "pass-" + RandomStringUtils.randomNumeric(4);
 		Passenger passenger = new Passenger(generatedString, observer);
 		PassengersWorld.setPassengerInWorld(passenger);
+		passenger.ready();
 		return passenger;
 	}
 }

@@ -11,17 +11,18 @@ import br.com.yellowcar.usecase.observer.ObserverMobile;
 
 @Service
 public final class CreateRandomCab {
-	
+
 	@Autowired
 	ObserverMobile observer;
-	
-	public Cab execute(Integer sizeX, Integer sizeY) {
-		String generatedString = RandomStringUtils.randomAlphabetic(3).toUpperCase()
-				+"-"+ RandomStringUtils.randomNumeric(4);
-		Double x = Math.random() * sizeX;
-		Double y = Math.random() * sizeY;
+
+	public Cab execute(Position2D position2D) {
+		String generatedString = RandomStringUtils.randomAlphabetic(3).toUpperCase() + "-"
+				+ RandomStringUtils.randomNumeric(4);
+		Double x = Math.random() * position2D.getX();
+		Double y = Math.random() * position2D.getY();
+		Double velocity = Math.random() * 100;
 		Position2D position = new Position2D(x.intValue(), y.intValue());
-		Cab cab=new Cab(generatedString, position, observer);
+		Cab cab = new Cab(generatedString, position, observer, velocity.intValue());
 		CabsWorld.setCabInWorld(cab);
 		return cab;
 	}

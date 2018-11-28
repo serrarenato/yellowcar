@@ -25,12 +25,6 @@ public class AppPrincipalFrame extends JFrame implements RefreshScreen{
 	private static final int MAX_X = World.SIZE_X;
 	private static final int MAX_Y = World.SIZE_Y;
 
-	private static final int NUMBER_OF_CABS = 10;
-	private static final int INTERVAL_BETWEEN_PASSENGER_ADD = 1000;
-	private static final int NUMBER_OF_BLOCKED_HORIZONTAL_LINES = 3;
-	private static final int NUMBER_OF_BLOCKED_VERTICAL_LINES = 3;
-	private static final int MAX_BLOCKED_SIZE_LINE = 500;
-
 	public AppPrincipalFrame() {
 		super("Simulator");
 		setSize(MAX_X + 50, MAX_Y + 50);
@@ -54,13 +48,6 @@ public class AppPrincipalFrame extends JFrame implements RefreshScreen{
 		graphics2d.setColor(Color.WHITE);
 		super.paint(g);
 
-		// define the position
-		int locX = 200;
-		int locY = 200;
-
-		// draw a line (there is no drawPoint..)
-///		g.drawLine(0, 0, locX, locY);
-		
 		if (CabsWorld.getCabsInWorld().size() != 0) {
 			for (final Cab cab : CabsWorld.getCabsInWorld()) {
 				switch (cab.getState()) {
@@ -68,12 +55,21 @@ public class AppPrincipalFrame extends JFrame implements RefreshScreen{
 					graphics2d.setColor(Color.GRAY);
 					break;
 				case ON_THE_WAY:
+					graphics2d.setColor(Color.YELLOW);
+					graphics2d.drawLine(cab.getLastPosition().getX(), cab.getLastPosition().getY(), cab.getPassenger().getInitialPosition().getX(),  cab.getPassenger().getInitialPosition().getY());
 					graphics2d.setColor(Color.DARK_GRAY);
 					break;
 				case BUSY:
-					graphics2d.setColor(Color.BLACK);
+					graphics2d.setColor(Color.GREEN);
+					graphics2d.drawLine(cab.getLastPosition().getX(), cab.getLastPosition().getY(), cab.getPassenger().getDestination().getX(),  cab.getPassenger().getDestination().getY());
+					graphics2d.setColor(Color.RED);
+					break;
+				case GET_PASSENGER:
+					break;
+				default:
+					break;
 				}
-				final Position2D p = (Position2D) cab.getLastPosition();
+				final Position2D p =  cab.getLastPosition();
 				graphics2d.drawString(cab.getId(), p.getX(), p.getY());
 			}
 		}
@@ -88,8 +84,14 @@ public class AppPrincipalFrame extends JFrame implements RefreshScreen{
 					break;
 				case IN_CAB:
 					graphics2d.setColor(Color.ORANGE);
+					break;
+				case ARRIVE_DESTINATION:
+					graphics2d.setColor(Color.GREEN);
+					break;
+				default:
+					break;
 				}
-				final Position2D p = (Position2D) passenger.getLastPosition();
+				final Position2D p = passenger.getLastPosition();
 				graphics2d.drawString(passenger.getId(), p.getX(), p.getY());
 			}
 		}

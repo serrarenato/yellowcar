@@ -14,28 +14,21 @@ import br.com.yellowcar.usecase.passenger.PutRandomPositionPassenger;
 
 @Service
 public class CreateSimulation {
-	
+
 	@Autowired
 	private CreateListRandomCabs createListRandomCabs;
 
 	@Autowired
-	private PutRandomPositionPassenger putRandomPositionPassenger;
-	@Autowired
-	private CreateRandomPassenger createRandomPassenger;
-
-	@Autowired
-	private InsertPassengerInBestCab insertPassengerInBestCab;
+	private CreatePassengerSimulation createPassengerSimulation;
 
 	public void execute() {
-		Position2D position2D = new Position2D(World.SIZE_X, World.SIZE_Y);
-		createListRandomCabs.execute(World.SIZE_X, World.SIZE_Y);
-		Passenger passenger = createRandomPassenger.execute(position2D);
-		try {
-			passenger = putRandomPositionPassenger.execute(passenger, position2D);
-		} catch (PassengerInvalidStateException e) {	
-			e.printStackTrace();
-		}
-		Cab cab = insertPassengerInBestCab.execute(passenger);
+
+		Position2D position2D = new Position2D(World.SIZE_X-50, World.SIZE_Y-50);
+		createListRandomCabs.execute(position2D);
+
+		createPassengerSimulation.execute();	
+			
+		//Cab cab = insertPassengerInBestCab.execute(passenger);
 
 	}
 }

@@ -8,17 +8,24 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
-@ToString(callSuper=true)
-public final class Cab extends Mobile {
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public final class Cab extends Mobile implements Movable {
 
 	private static final int LAST_POSITIONS_MAX_SIZE = 30;
-	
+	private int velocity = 500; // 500 ms interval of time in each move.
+
 	private Passenger passenger;
 
-	public Cab(String id, Position2D position, Observer observer ) {
+	public Cab(String id, Position2D position, Observer observer) {
 		super(id, observer);
 		this.setInitialPosition(position);
+	}
+
+	public Cab(String id, Position2D position, Observer observer, Integer velocity) {
+		super(id, observer);
+		this.setInitialPosition(position);
+		this.velocity = velocity;
 	}
 
 	State state = State.EMPTY;
@@ -30,6 +37,8 @@ public final class Cab extends Mobile {
 	 */
 	public void next() {
 		state = state.nextState();
+		setChanged();
+        notifyObservers();
 	}
 
 	public static enum State {
@@ -40,6 +49,16 @@ public final class Cab extends Mobile {
 		EMPTY {
 			@Override
 			State nextState() {
+				return ACCEPT_PASSENGER;
+			}
+		},
+
+		/**
+		 * O {@link Cab} está vazio. Estado inicial da máquina de estado.
+		 */
+		ACCEPT_PASSENGER {
+			@Override
+			State nextState() {
 				return ON_THE_WAY;
 			}
 		},
@@ -48,6 +67,15 @@ public final class Cab extends Mobile {
 		 * O {@link Cab} está a caminho de um {@link Passenger}
 		 */
 		ON_THE_WAY {
+			@Override
+			State nextState() {
+				return GET_PASSENGER;
+			}
+		},
+		/**
+		 * O {@link Cab} está a pegando um {@link Passenger} em sua posição inicial
+		 */
+		GET_PASSENGER{
 			@Override
 			State nextState() {
 				return BUSY;
@@ -76,4 +104,21 @@ public final class Cab extends Mobile {
 		}
 		this.setPositions(position);
 	}
+
+	@Override
+	public void move(Position2D destinationPosition) {
+		while (!this.getLastPosition().equals(destinationPosition)) {
+
+			Position2D currentPosition = this.getLastPosition();
+			currentPosition = new Position2D(Movable.increment(currentPosition.getX(), destinationPosition.getX()),
+					Movable.increment(currentPosition.getY(), destinationPosition.getY()));
+			setPositions(currentPosition);
+			try {
+				Thread.sleep(velocity);
+			} catch (InterruptedException e) {
+				System.out.println("Exceção na Thread do movimento do Carro");
+			}
+		}
+	}
+
 }
