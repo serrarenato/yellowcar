@@ -79,7 +79,7 @@ public final class Passenger extends Mobile {
 		ARRIVE_DESTINATION {
 			@Override
 			State nextState() {
-				return INITIAL;
+				return ARRIVE_DESTINATION;
 			}
 		};
 

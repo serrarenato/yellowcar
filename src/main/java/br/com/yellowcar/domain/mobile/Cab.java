@@ -116,7 +116,7 @@ public final class Cab extends Mobile implements Movable {
 			try {
 				Thread.sleep(velocity);
 			} catch (InterruptedException e) {
-				System.out.println("Exceção na Thread do movimento do Carro");
+				System.out.println("Exceção na Thread do movimento do Carro: "+e.getMessage());
 			}
 		}
 	}

@@ -79,9 +79,10 @@ public class ObserverMobile implements Observer {
 						break;
 					case BUSY:
 						cab.getPassenger().setPosition(cab.getLastPosition());
-						if (cab.getLastPosition().equals(cab.getPassenger().getDestination()))
+						if (cab.getLastPosition().equals(cab.getPassenger().getDestination())) {
 							cab.getPassenger().next();
-							cab.next();							
+							cab.next();
+						}
 						break;
 					default:
 						System.out.println("Metodo invalido");
