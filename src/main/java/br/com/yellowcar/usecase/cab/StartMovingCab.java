@@ -19,7 +19,8 @@ public class StartMovingCab {
 		cab.next();
 		cab.move(destinationPosition);
 		cab.next();
-		cab.getPassenger().next();
+		if (cab.getPassenger()!=null)
+			cab.getPassenger().next();
 	}
 
 

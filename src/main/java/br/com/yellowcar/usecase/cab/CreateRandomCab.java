@@ -20,7 +20,7 @@ public final class CreateRandomCab {
 				+ RandomStringUtils.randomNumeric(4);
 		Double x = Math.random() * position2D.getX();
 		Double y = Math.random() * position2D.getY();
-		Double velocity = Math.random() * 100;
+		Double velocity = Math.random() * 50;
 		Position2D position = new Position2D(x.intValue(), y.intValue());
 		Cab cab = new Cab(generatedString, position, observer, velocity.intValue());
 		CabsWorld.setCabInWorld(cab);

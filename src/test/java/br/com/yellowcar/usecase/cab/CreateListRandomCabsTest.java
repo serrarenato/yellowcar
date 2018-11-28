@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.yellowcar.YellowCarApplication;
+import br.com.yellowcar.domain.Position2D;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.World;
 
@@ -21,7 +22,7 @@ public class CreateListRandomCabsTest {
 
 	@Test
 	public void shouldReturnListCabsWithSuccess() {
-		Set<Cab> cabs = createListRandomCabs.execute(World.SIZE_X,World.SIZE_Y);
+		Set<Cab> cabs = createListRandomCabs.execute(new Position2D(World.SIZE_X,World.SIZE_Y));
 		System.out.println(cabs);
 		Assert.assertNotNull(cabs);
 		Assert.assertEquals(cabs.size(), 5);		

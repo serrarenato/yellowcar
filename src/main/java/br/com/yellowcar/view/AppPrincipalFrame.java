@@ -1,5 +1,6 @@
 package br.com.yellowcar.view;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -56,12 +57,15 @@ public class AppPrincipalFrame extends JFrame implements RefreshScreen{
 					break;
 				case ON_THE_WAY:
 					graphics2d.setColor(Color.YELLOW);
+					graphics2d.setStroke(new BasicStroke(4f));
 					graphics2d.drawLine(cab.getLastPosition().getX(), cab.getLastPosition().getY(), cab.getPassenger().getInitialPosition().getX(),  cab.getPassenger().getInitialPosition().getY());
 					graphics2d.setColor(Color.DARK_GRAY);
 					break;
 				case BUSY:
 					graphics2d.setColor(Color.GREEN);
-					graphics2d.drawLine(cab.getLastPosition().getX(), cab.getLastPosition().getY(), cab.getPassenger().getDestination().getX(),  cab.getPassenger().getDestination().getY());
+					graphics2d.setStroke(new BasicStroke(4f));
+					if (cab.getPassenger()!=null)
+						graphics2d.drawLine(cab.getLastPosition().getX(), cab.getLastPosition().getY(), cab.getPassenger().getDestination().getX(),  cab.getPassenger().getDestination().getY());
 					graphics2d.setColor(Color.RED);
 					break;
 				case GET_PASSENGER:

@@ -30,12 +30,15 @@ public class CreatePassengerSimulation {
 
 	@Async("passengersExecutor")
 	public void execute() {
-		Position2D position2D = new Position2D(World.SIZE_X, World.SIZE_Y);
+		Position2D position2D = new Position2D(World.SIZE_X+50, World.SIZE_Y+50);
 		Passenger passenger = null;
 		do {
 			if ((passenger == null) || (passenger.getState() == Passenger.State.ARRIVE_DESTINATION)) {
-				try {
+				try {				
 					Thread.sleep(INTERVAL_BETWEEN_PASSENGER_ADD);
+					if (passenger!=null)
+						PassengersWorld.removePassenger(passenger);
+					//PassengersWorld.getPassengersInWorld()
 					passenger = createRandomPassenger.execute(position2D);	
 					
 				} catch (InterruptedException e) {

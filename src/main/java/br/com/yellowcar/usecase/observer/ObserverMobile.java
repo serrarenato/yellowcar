@@ -6,11 +6,11 @@ import java.util.Observer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.yellowcar.domain.Position2D;
 import br.com.yellowcar.domain.exception.PassengerInvalidStateException;
 import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Mobile;
 import br.com.yellowcar.domain.mobile.Passenger;
-import br.com.yellowcar.domain.mobile.PassengersWorld;
 import br.com.yellowcar.usecase.InsertPassengerInBestCab;
 import br.com.yellowcar.usecase.cab.StartMovingCab;
 import br.com.yellowcar.usecase.passenger.PutRandomPositionPassenger;
@@ -35,16 +35,16 @@ public class ObserverMobile implements Observer {
 	public void update(Observable mobile, Object arg) {
 		if (mobile instanceof Mobile) {
 			if (mobile instanceof Passenger) {
-				refreshScreen.refreshScreen();
+				// refreshScreen.refreshScreen();
 				Passenger passenger = (Passenger) mobile;
 				if (passenger.getState() != null) {
-			//		System.out.println("Objeto passenger foi alterado: "
-			//				+ passenger.getPositions().get(passenger.getPositions().size() - 1) + " - "
-			//				+ passenger.getState());
+					// System.out.println("Objeto passenger foi alterado: "
+					// + passenger.getPositions().get(passenger.getPositions().size() - 1) + " - "
+					// + passenger.getState());
 					switch (passenger.getState()) {
-					
+
 					case INITIAL:
-						//PassengersWorld.getPassengersInWorld()
+						// PassengersWorld.getPassengersInWorld()
 						try {
 							putRandomPositionPassenger.execute(passenger);
 						} catch (PassengerInvalidStateException e) {
@@ -61,7 +61,7 @@ public class ObserverMobile implements Observer {
 				}
 			}
 			if (mobile instanceof Cab) {
-				refreshScreen.refreshScreen();
+				// refreshScreen.refreshScreen();
 				Cab cab = (Cab) mobile;
 				if (cab.getPositions().size() != 0) {
 					System.out.println("Objeto cab foi alterado: "
@@ -72,17 +72,15 @@ public class ObserverMobile implements Observer {
 					case ACCEPT_PASSENGER:
 						startMovingCab.execute(cab, cab.getPassenger().getInitialPosition());
 						break;
-					case ON_THE_WAY:						
+					case ON_THE_WAY:
 						break;
 					case GET_PASSENGER:
 						startMovingCab.execute(cab, cab.getPassenger().getDestination());
 						break;
 					case BUSY:
-						cab.getPassenger().setPosition(cab.getLastPosition());
-						if (cab.getLastPosition().equals(cab.getPassenger().getDestination())) {
-							cab.getPassenger().next();
-							cab.next();
-						}
+						if (cab.getPassenger() != null)
+							cab.getPassenger().setPosition(
+									new Position2D(cab.getLastPosition().getX(), cab.getLastPosition().getY() + 10));
 						break;
 					default:
 						System.out.println("Metodo invalido");

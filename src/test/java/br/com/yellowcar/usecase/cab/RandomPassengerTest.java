@@ -35,7 +35,7 @@ public class RandomPassengerTest {
 	@Test
 	public void shouldPutPositionInPassengerWithSuccess() throws PassengerInvalidStateException {
 		Passenger passenger = createRandomPassenger.execute(world);
-		passenger = putRandomPositionPassenger.execute(passenger, world);
+		passenger = putRandomPositionPassenger.execute(passenger);
 		System.out.println(passenger);
 		Assert.assertNotNull(passenger);
 		Assert.assertTrue(passenger.getState()==Passenger.State.NO_CAB);	

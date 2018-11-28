@@ -1,6 +1,7 @@
 package br.com.yellowcar.domain.mobile;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 
@@ -22,5 +23,13 @@ public final class PassengersWorld {
 	}
 	public static synchronized void setPassengerInWorld(Passenger passenger) {
 		passengerInWorld.add(passenger);
+	}
+	public static void removePassenger(Passenger passenger) {
+		for (Iterator<Passenger> iterator = passengerInWorld.iterator(); iterator.hasNext();) {
+			Passenger passengerList =  iterator.next();
+			if (passengerList.getId().equals(passenger.getId())){
+		        iterator.remove();
+		    }       
+		}		
 	}
 }
