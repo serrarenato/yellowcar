@@ -35,7 +35,7 @@ public class InsertTheBestCabToPassengerTest {
 	public void shouldReturnOneCabsWithPassengerWithSuccess() throws PassengerInvalidStateException {
 		Position2D position2D = new Position2D(World.SIZE_X, World.SIZE_Y);
 		createListRandomCabs.execute(position2D);
-		Passenger passenger = createRandomPassenger.execute(position2D);
+		Passenger passenger = createRandomPassenger.execute();
 		passenger = putRandomPositionPassenger.execute(passenger);
 		Cab cab = insertPassengerInBestCab.execute(passenger);
 		System.out.println(cab);

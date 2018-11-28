@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
 @ToString(callSuper=true)
 public final class Passenger extends Mobile {
 	State state = State.INITIAL;
@@ -90,5 +89,14 @@ public final class Passenger extends Mobile {
 	public void setPosition(Position2D position) {
 		this.setPositions(position);
 	}
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
+	
 
 }

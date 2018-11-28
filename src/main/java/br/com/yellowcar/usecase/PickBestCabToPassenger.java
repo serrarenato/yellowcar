@@ -1,6 +1,7 @@
 package br.com.yellowcar.usecase;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,6 +36,11 @@ public class PickBestCabToPassenger {
 			if (restrictionChain.isPossible(cab, passenger))
 				restrictCabs.add(cab);
 		Optional<Cab> cab = selector.findTheBest(restrictCabs, passenger);
+		if (!cab.isPresent()) {
+			Iterator<Cab> iter = restrictCabs.iterator();
+			cab.of(iter.next());			
+		}
+			
 		return cab.get();
 	}
 }

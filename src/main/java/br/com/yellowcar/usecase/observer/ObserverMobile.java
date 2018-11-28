@@ -18,7 +18,7 @@ import br.com.yellowcar.view.RefreshScreen;
 
 @Service
 public class ObserverMobile implements Observer {
-
+//TODO: Dividir esta classe em dois observers para facilitar manutenção
 	@Autowired
 	private InsertPassengerInBestCab insertPassengerInBestCab;
 
@@ -38,9 +38,7 @@ public class ObserverMobile implements Observer {
 				// refreshScreen.refreshScreen();
 				Passenger passenger = (Passenger) mobile;
 				if (passenger.getState() != null) {
-					// System.out.println("Objeto passenger foi alterado: "
-					// + passenger.getPositions().get(passenger.getPositions().size() - 1) + " - "
-					// + passenger.getState());
+					System.out.println("Objeto passenger foi alterado: "+ passenger.getState());
 					switch (passenger.getState()) {
 
 					case INITIAL:
@@ -78,9 +76,12 @@ public class ObserverMobile implements Observer {
 						startMovingCab.execute(cab, cab.getPassenger().getDestination());
 						break;
 					case BUSY:
-						if (cab.getPassenger() != null)
+						if (cab.getPassenger() != null) {
 							cab.getPassenger().setPosition(
 									new Position2D(cab.getLastPosition().getX(), cab.getLastPosition().getY() + 10));
+							if (cab.getPassenger().getDestination().equals(cab.getLastPosition()))
+								cab.getPassenger().next();
+						}
 						break;
 					default:
 						System.out.println("Metodo invalido");

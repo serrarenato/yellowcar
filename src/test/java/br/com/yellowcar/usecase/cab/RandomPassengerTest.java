@@ -26,15 +26,15 @@ public class RandomPassengerTest {
 	private final Position2D world = new Position2D(500,400);
 	@Test
 	public void shouldReturnListPassengerWithSuccess() {
-		Passenger passenger = createRandomPassenger.execute(world);
-		Passenger passenger2 = createRandomPassenger.execute(world);
+		Passenger passenger = createRandomPassenger.execute();
+		Passenger passenger2 = createRandomPassenger.execute();
 		System.out.println(passenger +" "+ passenger2);
 		Assert.assertNotNull(passenger);
 		Assert.assertFalse(passenger.equals(passenger2));	
 	}
 	@Test
 	public void shouldPutPositionInPassengerWithSuccess() throws PassengerInvalidStateException {
-		Passenger passenger = createRandomPassenger.execute(world);
+		Passenger passenger = createRandomPassenger.execute();
 		passenger = putRandomPositionPassenger.execute(passenger);
 		System.out.println(passenger);
 		Assert.assertNotNull(passenger);

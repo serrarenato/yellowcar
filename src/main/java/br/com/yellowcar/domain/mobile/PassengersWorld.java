@@ -22,14 +22,15 @@ public final class PassengersWorld {
 		return passengerInWorld;
 	}
 	public static synchronized void setPassengerInWorld(Passenger passenger) {
-		passengerInWorld.add(passenger);
+		synchronized (passengerInWorld) {
+			passengerInWorld.add(passenger);
+		}
 	}
 	public static void removePassenger(Passenger passenger) {
-		for (Iterator<Passenger> iterator = passengerInWorld.iterator(); iterator.hasNext();) {
-			Passenger passengerList =  iterator.next();
-			if (passengerList.getId().equals(passenger.getId())){
-		        iterator.remove();
-		    }       
-		}		
+		synchronized (passengerInWorld) {
+			 if (!passengerInWorld.remove(passenger))
+				 System.out.println("Impossível remover este Passageiro!");	
+		}
+	
 	}
 }

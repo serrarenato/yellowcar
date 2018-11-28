@@ -22,7 +22,7 @@ public final class CreateRandomPassenger {
 	@Autowired
 	ObserverMobile observer;
 
-	public Passenger execute(Position2D world) {
+	public Passenger execute() {
 		String generatedString = "pass-" + RandomStringUtils.randomNumeric(4);
 		Passenger passenger = new Passenger(generatedString, observer);
 		PassengersWorld.setPassengerInWorld(passenger);

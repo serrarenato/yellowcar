@@ -27,24 +27,27 @@ public class CreatePassengerSimulation {
 	private CreateRandomPassenger createRandomPassenger;
 
 	private static final int INTERVAL_BETWEEN_PASSENGER_ADD = 1000;
+	private static final int MAX_PASSENGER = 2;
 
 	@Async("passengersExecutor")
 	public void execute() {
-		Position2D position2D = new Position2D(World.SIZE_X+50, World.SIZE_Y+50);
-		Passenger passenger = null;
+
 		do {
-			if ((passenger == null) || (passenger.getState() == Passenger.State.ARRIVE_DESTINATION)) {
-				try {				
-					Thread.sleep(INTERVAL_BETWEEN_PASSENGER_ADD);
-					if (passenger!=null)
-						PassengersWorld.removePassenger(passenger);
-					//PassengersWorld.getPassengersInWorld()
-					passenger = createRandomPassenger.execute(position2D);	
-					
-				} catch (InterruptedException e) {
-					System.out.println("Problemas ao inserir outro passeiro na Simulação" + e.getMessage());
+			if (PassengersWorld.getPassengersInWorld().size() < MAX_PASSENGER)
+				createRandomPassenger.execute();
+			for (Passenger passenger : PassengersWorld.getPassengersInWorld())
+				if ((passenger == null) || (passenger.getState() == Passenger.State.ARRIVE_DESTINATION)) {
+					try {
+						Thread.sleep(INTERVAL_BETWEEN_PASSENGER_ADD);
+						if (passenger != null)
+							PassengersWorld.removePassenger(passenger);
+						// PassengersWorld.getPassengersInWorld()
+
+					} catch (InterruptedException e) {
+						System.out.println("Problemas ao inserir outro passeiro na Simulação" + e.getMessage());
+						throw new RuntimeException("Problemas ao inserir outro passeiro na Simulação");
+					}
 				}
-			}
 		} while (true);
 
 	}
