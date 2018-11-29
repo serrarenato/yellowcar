@@ -20,6 +20,8 @@ Para a alteração da tela e controle de estados foi utilizado um design Pattern
 
 Para verificar o melhor taxi para um determinado passagerio foi utilizado um design Pattern chamado Chain of Responsability que encadeia várias restrições e obtém os melhores indicados, no arquivo application.properties, eu defino qual seletor usar para a escolha dos carros cab.selector=MinorDistance, menor distância  e qual cadeia de restrições devo utilizar cab.restriction=STATECAB_MAXDISTANCE, nesse caso é o estado do carro livre e a maxima distância em relação ao passageiro.
 
+*A ideia depois de finalizado o sistema  quebra-lo em pelo menos mais um componente que ficará no docker somente para fazer os calculos de qual o melhor carro para cada passageiro.
+
 
 
 ### Instalação -- ainda verificando como fazer um docker expor o swing
