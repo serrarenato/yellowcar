@@ -22,7 +22,7 @@ Para verificar o melhor taxi para um determinado passagerio foi utilizado um des
 
 
 
-### Instalação
+### Instalação -- ainda verificando como fazer um docker expor o swing
 
 mvn package
 
