@@ -3,6 +3,7 @@ package br.com.yellowcar.usecase.cab;
 import java.util.Set;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,13 @@ import br.com.yellowcar.domain.mobile.World;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = YellowCarApplication.class)
+@Ignore
 public class CreateListRandomCabsTest {
 	@Autowired
 	private CreateListRandomCabs createListRandomCabs;
 
 	@Test
+	@Ignore
 	public void shouldReturnListCabsWithSuccess() {
 		Set<Cab> cabs = createListRandomCabs.execute(new Position2D(World.SIZE_X,World.SIZE_Y));
 		System.out.println(cabs);

@@ -1,6 +1,7 @@
 package br.com.yellowcar.usecase.cab;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import br.com.yellowcar.usecase.passenger.PutRandomPositionPassenger;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = YellowCarApplication.class)
+@Ignore
 public class RandomPassengerTest {
 	@Autowired
 	private CreateRandomPassenger createRandomPassenger;
