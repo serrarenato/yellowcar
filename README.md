@@ -9,39 +9,29 @@ Quando um passagerio entra no sistema ele é capturado pelo sistema e um taxi va
 
 ### Tecnico
 
-Para os passageiros foi criada um FSM(Máquina de estados finita) aonde eu controlo o estado do passageiro o mesmo foi feito para os taxis
+A arquitetura do sistema é com o Clean Architecture, temos UseCases para camada de Negocio, Entities para classes de dominio e a view para a tela, tentando sempre usar os princípios do Solid.
 
-### Installing
+Foi utilizado SpringBoot para desenvolvimento.
+
+Para os passageiros foi criada um FSM(Máquina de estados finita) aonde eu controlo o estado do passageiro o mesmo foi feito para os taxis, ambas as FSM estão dentro de suas respectivas entidades.
+Para a tela(Swing) existe um unico arquivo que é chamado toda vez que a tela precisa ser alterada.
+
+Para a alteração da tela e controle de estados foi utilizado um design Pattern chamado Observer que observa todos os objetos que devem ser observados(Taxi e Passagerio neste caso) e notifica um observador, desse modo, toda vez que um taxi ou um passagerio é alterado o observador verifica quais ações ele deve chamar.
+
+Para verificar o melhor taxi para um determinado passagerio foi utilizado um design Pattern chamado Chain of Responsability que encadeia várias restrições e obtém os melhores indicados, no arquivo application.properties, eu defino qual seletor usar para a escolha dos carros cab.selector=MinorDistance, menor distância  e qual cadeia de restrições devo utilizar cab.restriction=STATECAB_MAXDISTANCE, nesse caso é o estado do carro livre e a maxima distância em relação ao passageiro.
+
+
+
+### Instalação
 
 mvn package
 
 sudo docker-compose up
 
-End with an example of getting some data out of the system or using it for a little demo
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Renato Serra** - *Initial work* - [YellowCar](https://github.com/PurpleBooth)
+* **Renato Serra** - *Initial work* - [YellowCar](https://github.com/serrarenato/yellowcar)
 
 
 
