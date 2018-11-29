@@ -4,15 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import br.com.yellowcar.domain.Position2D;
-import br.com.yellowcar.domain.exception.PassengerInvalidStateException;
-import br.com.yellowcar.domain.mobile.Cab;
 import br.com.yellowcar.domain.mobile.Passenger;
 import br.com.yellowcar.domain.mobile.PassengersWorld;
-import br.com.yellowcar.domain.mobile.World;
-import br.com.yellowcar.usecase.cab.CreateListRandomCabs;
 import br.com.yellowcar.usecase.passenger.CreateRandomPassenger;
-import br.com.yellowcar.usecase.passenger.PutRandomPositionPassenger;
 
 /**
  * Create a new Passenger Always one Passenger arrive to destination
@@ -27,7 +21,7 @@ public class CreatePassengerSimulation {
 	private CreateRandomPassenger createRandomPassenger;
 
 	private static final int INTERVAL_BETWEEN_PASSENGER_ADD = 1000;
-	private static final int MAX_PASSENGER = 2;
+	private static final int MAX_PASSENGER = 1;
 
 	@Async("passengersExecutor")
 	public void execute() {
